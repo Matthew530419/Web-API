@@ -246,7 +246,7 @@
 
   `</script>`
 
-#### 8. Find symbol of rabbit
+### 8. Find symbol of rabbit
 
 - Add button named Find a rabbit and image with id named rabbit as below.
 
@@ -286,7 +286,7 @@
   }
   `</style>`
 
-  - In case of all codes, Please refer file named `index.html`.
+- In case of all codes, Please refer file named `index.html`.
 
 ### 7.Resolution of failures
 
