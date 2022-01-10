@@ -1,6 +1,6 @@
 ### 1. Project name: Learning Web API
 
-### 2. Period : 2 day
+### 2. Period : 3 day
 
 ### 3. Concept of API
 
@@ -79,7 +79,7 @@
 
 - page X,Y : coordinate should be defined based on whole page size itself.
 
-##### 6-2-1. Display coordinates of special div
+##### 6-2-1. Display coordinates on special div
 
 - `<style>`
   body {
@@ -157,7 +157,7 @@
 
 - In case of all codes, Please refer file named `coordinate2.html`.
 
-#### 6-3. Display coordinates with image and lines
+#### 6-3. Display coordinates with symbol icon and lines
 
 - Please add sytle.css for decorating with symble and main.js for dynamic event values because of used complicated values except for tage of style on HTML.
 
@@ -217,7 +217,7 @@
 
 - In case of all codes, Please refer file named `main.js`.
 
-### 7. Load
+### 7. Loading sequence on console
 
 - In case of Web page, browser download resources in parallel such as image, font, javascript parsing HTML file. Option named defer would be better than others. Please refer operating sequence as below.
   Start to parse HTML file, and then, change DOM elements when tag of title. After parsing HTML completely, one of outputs named 'js loaded' is operated at first because of defer. Second output is DOMContentLoaded. Final output is load. DOMContentLoad deals with only document. Load deals with all resources such as CSS, images, and so on including document. So, speed of operate DOMContentLoad is faster than Load. In case of getting output when before exit page, use event type named beforunload. You could check output when refresh page. In case of getting output when exit page, use event type named unload.
