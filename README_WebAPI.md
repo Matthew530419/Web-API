@@ -37,7 +37,7 @@
   Use style tag of HTML instead of CSS as below. Please refer README_CSS for good understanding regarding decorating in detail.
 
 - `<style>`
-  .tag {
+  `.tag` {
   display: inline-block;
   background-color: thistle;
   padding: 16px;
@@ -82,17 +82,17 @@
 ##### 6-2-1. Display coordinates on special div
 
 - `<style>`
-  body {
+  `body` {
   background-color: black;
   }
-  div {
+  `div` {
   width: 250px;
   height: 250px;
   background-color: blanchedalmond;
   margin-bottom: 4px;
   border-radius: 4px;
   }
-  .special {
+  `.special` {
   background-color: lightsalmon;
   }
   `</style>`
@@ -112,8 +112,8 @@
   `<div></div>`
   `<script>`
   const special = document.querySelector(".special");
-  special.addEventListener('click', event => {
-  const rect = special.getBoundingClientRect();
+  `special.addEventListener`('click', event => {
+  `const rect` = special.getBoundingClientRect();
   console.log(rect);
   console.log(`client: ${event.clientX}, ${event.clientY}`);
   console.log(`page: ${event.pageX}, ${event.pageY}`);
@@ -130,7 +130,7 @@
 - Please add aside in tag of style as below to put buttons on position of aside.
 
 - `<style>`
-  aside {
+  `aside` {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -144,13 +144,13 @@
   const scrollBy = document.querySelector(".scroll-by");
   const scrollTo = document.querySelector(".scroll-to");
   const scrollInto = document.querySelector(".scroll-into");
-  scrollBy.addEventListener('click', event => {
+  `scrollBy.addEventListener`('click', event => {
   window.scrollBy(0, 100);
   });
-  scrollTo.addEventListener('click', event => {
+  `scrollTo.addEventListener`('click', event => {
   window.scrollTo(0, 100);
   });
-  scrollInto.addEventListener('click', event => {
+  `scrollInto.addEventListener`('click', event => {
   special.scrollIntoView();
   });
   `</script>`
@@ -174,22 +174,22 @@
 
 - In case of CSS file, position should be absolute to get fixed position. Top is same as client X and left is same as client Y. Use CSS function named transform to reposition symbol icon and span data. Symbol icon is needed parameters named top: -50%, left: 50% to put the icon on center.
 
-- .line {
+- `.line` {
   position: absolute;
   background-color: white;
   }
-  .horizontal {
+  `.horizontal` {
   width: 100%;
   height: 1px;
   top: 50%;
   }
-  .target {
+  `.target` {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   }
-  .tag {
+  `.tag` {
   color: white;
   position: absolute;
   top: 50%;
@@ -202,17 +202,16 @@
 
 - In case of Javascript file, immutable variables should be defined relate with classes to oprate dynamically. Coordinates are displayed by below codes on documentElement of browser per event of mousemove.
 
-- document.addEventListener('mousemove', (event) => {
+- document.addEventListener(`'mousemove'`, (event) => {
   const X = event.clientX;
   const Y = event.clientY;
-  console.log(`${event.clientX}, ${event.clientY}`);
-  vertical.style.left = `${X}px`;
-  horizontal.style.top = `${Y}px`;
-  target.style.left = `${X}px`;
-  target.style.top = `${Y}px`;
-  tag.style.left = `${X}px`;
-  tag.style.top = `${Y}px`;
-  tag.innerHTML = `${X}px, ${Y}px `;
+  `vertical.style.left` = `${X}px`;
+  `horizontal.style.top` = `${Y}px`;
+  `target.style.left` = `${X}px`;
+  `target.style.top` = `${Y}px`;
+  `tag.style.left` = `${X}px`;
+  `tag.style.top` = `${Y}px`;
+  `tag.innerHTML` = `${X}px, ${Y}px `;
   });
 
 - In case of all codes, Please refer file named `main.js`.
@@ -232,20 +231,62 @@
   `</head>`
   `<body>`
   `<script>`
-  window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener(`'DOMContentLoaded'`, () => {
   console.log('DOMContentLoaded');
   });
-  window.addEventListener('load', () => {
+  window.addEventListener(`'load'`, () => {
   console.log('load');
   });
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener(`'beforeunload'`, () => {
   console.log('beforeunloaded');
   });
-  window.addEventListener('unload', () => {
+  window.addEventListener(`'unload'`, () => {
   console.log('unloaded');
   });
 
   `</script>`
+
+#### 8. Find symbol of rabbit
+
+- Add button named Find a rabbit and image with id named rabbit as below.
+
+- `<body>`
+  `<button>Find a rabbit</button>`
+  `<img id="rabbit" src="img/rabbit.png" alt="rabbit">`
+  `</body>`
+
+- In case of symbol of rabbit with button, use function named `scrollIntoView` after variables named button and rabbit defined. use option of block: center if you want to put symbol of rabbit on center of documentElement of browser. rabbit is element of function named scrollIntoView.
+
+- `<script>`
+  `const button` = document.querySelector('button');
+  `const rabbit` = document.querySelector('#rabbit');
+  `button.addEventListener`('click', event => {
+  `rabbit.scrollIntoView`({ behavior: 'smooth', block: 'center'});
+  });
+  `</script>`
+
+- In case of decorating button and put icons on cener, function named button and body would be used as below. CSS function named text-align could place icons horizontally.
+
+- `<style>`
+  `body` {
+  background-color: black;
+  `text-align`: center;
+  }
+  `img` {
+  display: block;
+  margin: auto;
+  }
+  `button` {
+  outline: none;
+  background-color: tomato;
+  color: white;
+  font-size: 32px;
+  margin: 16px, 0;
+  cursor: pointer;
+  }
+  `</style>`
+
+  - In case of all codes, Please refer file named `index.html`.
 
 ### 7.Resolution of failures
 
@@ -256,3 +297,7 @@
 - countermeasure: type window.inner or document.documentElement on console tap of browser. In case of stangeous values come from browser engine, would be fixed correctly.
 
      <img src="./img/screen2.png" width="400" height="200">
+
+- symptom: pointer of cursor do not oprated. I do not know root cuase why broswer engine do not operate correctly. I will check...
+
+- countermeasure: class named button is assigned in memory and then changed tag of button. It would be operated correctly.
