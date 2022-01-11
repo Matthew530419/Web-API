@@ -125,6 +125,8 @@
 
 - If you do not want scrolling, add `overflow: hidden;` on body function in tag of style.
 
+    <img src="./img/output1.png" width="700" height="400">
+
 ##### 6-2-2. Move coordinates with buttons
 
 - Please add aside in tag of style as below to put buttons on position of aside.
@@ -156,6 +158,8 @@
   `</script>`
 
 - In case of all codes, Please refer file named `coordinate2.html`.
+
+    <img src="./img/output2.png" width="700" height="400">
 
 #### 6-3. Display coordinates with symbol icon and lines
 
@@ -216,6 +220,8 @@
 
 - In case of all codes, Please refer file named `main.js`.
 
+    <img src="./img/output3.png" width="700" height="400">
+
 ### 7. Loading sequence on console
 
 - In case of Web page, browser download resources in parallel such as image, font, javascript parsing HTML file. Option named defer would be better than others. Please refer operating sequence as below.
@@ -245,6 +251,8 @@
   });
 
   `</script>`
+  
+    <img src="./img/output4.png" width="700" height="400">
 
 ### 8. Find symbol of rabbit
 
@@ -287,6 +295,8 @@
   `</style>`
 
 - In case of all codes, Please refer file named `index.html`.
+
+    <img src="./img/output5.png" width="700" height="400">
 
 ### 9. How to operate datas with API by browser
 
