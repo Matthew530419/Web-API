@@ -288,7 +288,57 @@
 
 - In case of all codes, Please refer file named `index.html`.
 
-### 7.Resolution of failures
+### 9. How to operate datas with API by browser
+
+- Object named Node inherits object named EventTarget. So, Event could occur on node because node inherits EventTarget. Document or Element inherit node. So, Event could occur on Document or Element according to DOM tree.
+In addition, browsers creat DOM tree with HTML data to understand and ready to operate correctly itself. For example, TextNode inherits h1 and h1 is inherits section, section inherits body step by step. Please compare HTML codes with DOM tree and find matching connection. 
+
+    <img src="./img/node.png" width="700" height="200">
+
+    <img src="./img/dom1.png" width="700" height="400">
+
+- EventTarget API offers 3 methods such as addEventListener(), removeEventListener(), dispatchEvent(). Element or Document also use the methods because element or document inherits node.
+Please refer https://developer.mozilla.org/en-US/docs/Web/API/Node and https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.
+
+- Rendering means getting input named HTML datas and transfer output for user see displayed datas on window. Please refer comprehensive rendering path as below. 
+
+    <img src="./img/path.png" width="700" height="400">
+
+- Browser parse HTML datas on request/response stage and load DOMContent, resources on loading stage. Browser transforms loaded datas into objects named DOM, CCSOM on scripting stage. Browser creats render tree for direct user interface on rendering stage. Grouping request/response, loading, scripting, rendering stage is for browser to construct data trees for browser understand datas and ready to operate correctly.
+
+- Browser calculates and defines their layout per output. layout information maybe includes coordinates, width, height, range, position, and so on regarding inline blocks and div blocks.
+Browser creats layers to paint. To fix some of datas quickly when user makes a fault, each range of paint is defined and applied to per layer on paint stage. 
+
+- In case whole paint area is defined on only one layer, browser should change all paint datas whenever some of datas are changed. Browser displays arranged layers complying with Z-index on composition stage. If some of arranged layers repositioning, it would be possible to be changed on only composition stage except for layout and paint stage. 
+
+#### 9-1. DOM tree
+
+- DOM: document object model. DOM mean HTML data is transformed into document object according to DOM tree. For example, tags of HTML is transformed to node of javascript by browser.
+
+     <img src="./img/dom1.png" width="700" height="400">
+
+#### 9.2 CCSOM tree
+
+- CCSOM: CCS object model. CSSOM creats another tree in which tag of style on HTML or CSS file are transformed into CCS object according to DOM tree. CSSOM has computed style with cascading rules.
+
+     <img src="./img/cssom.png" width="700" height="400">
+
+#### 9.3 Render Tree
+
+- Render tree means tree combined with DOM tree and CCSOM tree.
+The render tree do not include meta datas like tag of head that help better buliding up structures for stable. 
+
+     <img src="./img/render1.png" width="700" height="400">
+
+- In case tag of span has 0 value of opacity and hidden value of visibility, user can not see span data on window even though render tree has span data. 
+
+     <img src="./img/render2.png" width="700" height="400">
+
+- In contrast, in case span has none value of display, user can not see span data on window and render tree also do not have span data.
+
+     <img src="./img/render3.png" width="700" height="400">
+
+### 10.Resolution of failures
 
 - symptom: stangeous values of winow.inner, document.documentElement even though application operate without error. I do not know root cause why browser engine operate trash values. I will check...
 
