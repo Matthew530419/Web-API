@@ -67,7 +67,7 @@
 
 #### 6-1. Default coordinate
 
-- Element.getBoundingClientRect(): Object named Element has function of API regarding coordinate. Element include all of DOM on browser, such as tag of image and text and so on.
+- Element.getBoundingClientRect(): Object named Element has function of API regarding coordinate. Element includes all of DOM on browser, such as tag of image and text and so on.
 
 - Top of getBoundingClientRect() is same as X coordinate on browser. Left is same as Y coordinate. In contrast, right is same as right of CSS. Bottom is same as bottom of CSS. Javascript assign default coordinate top left direction. CSS assign default coordinate bottom right direction.
 
@@ -178,7 +178,10 @@
 
 - In case of CSS file, position should be absolute to get fixed position. Top is same as client X and left is same as client Y. Use CSS function named transform to reposition symbol icon and span data. Symbol icon is needed parameters named top: -50%, left: 50% to put the icon on center.
 
-- `.line` {
+- `body` {
+  background-color: black;
+  }
+  `.line` {
   position: absolute;
   background-color: white;
   }
@@ -222,6 +225,55 @@
 
     <img src="./img/output3.png" width="700" height="400">
 
+#### 6-4. Optimized coordinates with symbol icon and lines
+
+- In fact, application of 6-3 use properties of layout, paint, composition stage. It would be bad choice for rendering. So, optimization is needed. HTML is same between 6-3 and 6-4.
+
+- In case of CSS file, margin of body should be 0% to remove the margin if margin occur on window. CSS property named top and left do not need because javascript use transform except for top and left. Margin of .tag should be added. CSS property named transform would not used on CSS file if javascript use the transfrom.
+
+- `body` {
+  background-color: black;
+  margin: 0%;
+  }
+  `.horizontal` {
+  width: 100%;
+  height: 1px;
+  }
+  `.vertical` {
+  width: 1px;
+  height: 100%;
+  }
+  `.target` {
+  position: absolute;
+  }
+  `.tag` {
+  color: white;
+  position: absolute;
+  margin: 20px;
+  font-size: 38px;
+  }
+
+- Use addEventListener of load to operate when completed fetching and protect mis-operating. Mis-operating maybe come from not completely fetched HTML data. getBoundingClientRect(), targetRect.width, targetRect.height should be needed to display coordinates and move near default coordinates. CSS property named transform is generally used with translate fucntion on Javascript. Values of translate function could use targetRect.width, targetRect.height on Javascript.
+
+- `window.addEventListener`('load', () => {
+  const targetRect = target.getBoundingClientRect();
+  const targetHalfWidth = targetRect.width / 2 ;
+  const targetHalfHeight = targetRect.height / 2;
+  `document.addEventListener`('mousemove', (event) => {
+  const X = event.clientX;
+  const Y = event.clientY;
+  vertical.style.transform = `translateX(${X}px)`;
+  horizontal.style.transform = `translateY(${Y}px)`;
+  target.style.transform = `translate(${X-targetHalfWidth}px, ${Y-targetHalfHeight}px)`;
+  tag.style.transform = `translate(${X}px, ${Y}px)`;
+  tag.innerHTML = `${X}px, ${Y}px `;
+  });
+  });
+
+    <img src="./img/output6.png" width="700" height="400">
+
+- Effort to optimize application would be not only reduce delay when operating but also improve with high level coding skill.
+
 ### 7. Loading sequence on console
 
 - In case of Web page, browser download resources in parallel such as image, font, javascript parsing HTML file. Option named defer would be better than others. Please refer operating sequence as below.
@@ -251,7 +303,7 @@
   });
 
   `</script>`
-  
+
     <img src="./img/output4.png" width="700" height="400">
 
 ### 8. Find symbol of rabbit
@@ -301,25 +353,27 @@
 ### 9. How to operate datas with API by browser
 
 - Object named Node inherits object named EventTarget. So, Event could occur on node because node inherits EventTarget. Document or Element inherit node. So, Event could occur on Document or Element according to DOM tree.
-In addition, browsers creat DOM tree with HTML data to understand and ready to operate correctly itself. For example, TextNode inherits h1 and h1 is inherits section, section inherits body step by step. Please compare HTML codes with DOM tree and find matching connection. 
+  In addition, browsers creat DOM tree with HTML data to understand and ready to operate correctly itself. For example, TextNode inherits h1 and h1 is inherits section, section inherits body step by step. Please compare HTML codes with DOM tree and find matching connection.
 
-    <img src="./img/node.png" width="700" height="200">
+      <img src="./img/node.png" width="700" height="200">
 
-    <img src="./img/dom1.png" width="700" height="400">
+      <img src="./img/dom1.png" width="700" height="400">
 
 - EventTarget API offers 3 methods such as addEventListener(), removeEventListener(), dispatchEvent(). Element or Document also use the methods because element or document inherits node.
-Please refer https://developer.mozilla.org/en-US/docs/Web/API/Node and https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.
+  Please refer https://developer.mozilla.org/en-US/docs/Web/API/Node and https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.
 
-- Rendering means getting input named HTML datas and transfer output for user see displayed datas on window. Please refer comprehensive rendering path as below. 
+- Rendering means getting input named HTML datas and transfer output for user see displayed datas on window. Please refer comprehensive rendering path as below.
 
     <img src="./img/path.png" width="700" height="400">
 
 - Browser parse HTML datas on request/response stage and load DOMContent, resources on loading stage. Browser transforms loaded datas into objects named DOM, CCSOM on scripting stage. Browser creats render tree for direct user interface on rendering stage. Grouping request/response, loading, scripting, rendering stage is for browser to construct data trees for browser understand datas and ready to operate correctly.
 
 - Browser calculates and defines their layout per output. layout information maybe includes coordinates, width, height, range, position, and so on regarding inline blocks and div blocks.
-Browser creats layers to paint. To fix some of datas quickly when user makes a fault, each range of paint is defined and applied to per layer on paint stage. 
+  Browser creats layers to paint. To fix some of datas quickly when user makes a fault, each range of paint is defined and applied to per layer on paint stage.
 
-- In case whole paint area is defined on only one layer, browser should change all paint datas whenever some of datas are changed. Browser displays arranged layers complying with Z-index on composition stage. If some of arranged layers repositioning, it would be possible to be changed on only composition stage except for layout and paint stage. 
+- In case whole paint area is defined on only one layer, browser should change all paint datas whenever some of datas are changed. Browser displays arranged layers complying with Z-index on composition stage. If some of arranged layers repositioning, it would be possible to be changed on only composition stage except for layout and paint stage.
+
+- Please refer https://csstriggers.com indicating whether or not choosed CSS property is good. Blink is one of engine on chrome. Gecko is one of engine on firefox. Webkit is one of engine on iOS and safari. EdgeHTML used to be one of engine on older edge browser and up-to-date edge browser use blink engine same as chrome. It would be bad choice of property if use layout, paint, composition stage. Try to use efficient property with less change such as only changed composition or changed paint and composition. For example, browser should use layout, paint, composition stage many times if values of property named `top` and `left` are changed. So, use property named `transform` to use only composition stage.
 
 #### 9-1. DOM tree
 
@@ -336,11 +390,11 @@ Browser creats layers to paint. To fix some of datas quickly when user makes a f
 #### 9.3 Render Tree
 
 - Render tree means tree combined with DOM tree and CCSOM tree.
-The render tree do not include meta datas like tag of head that help better buliding up structures for stable. 
+  The render tree do not include meta datas like tag of head that help better buliding up structures for stable.
 
-     <img src="./img/render1.png" width="700" height="400">
+       <img src="./img/render1.png" width="700" height="400">
 
-- In case tag of span has 0 value of opacity and hidden value of visibility, user can not see span data on window even though render tree has span data. 
+- In case tag of span has 0 value of opacity and hidden value of visibility, user can not see span data on window even though render tree has span data.
 
      <img src="./img/render2.png" width="700" height="400">
 
