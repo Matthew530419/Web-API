@@ -1,6 +1,6 @@
 ### 1. Project name: Learning Web API
 
-### 2. Period : 3 day
+### 2. Period : 1 week
 
 ### 3. Concept of API
 
@@ -272,7 +272,7 @@
 
     <img src="./img/output6.png" width="700" height="400">
 
-- Effort to optimize application would be not only reduce delay when operating but also improve with high level coding skill.
+- Effort to optimize application would not only reduce delay when operating but also improve with high level coding skill. Performance tab of browser developer tool will help developer optimize their application indicating whether or not experience exist like layout shift.
 
 ### 7. Loading sequence on console
 
@@ -350,14 +350,49 @@
 
     <img src="./img/output5.png" width="700" height="400">
 
-### 9. How to operate datas with API by browser
+### 9. Add textcontent on window with created elements
+
+- Return value of querySelector is element object representing first element in document. For example, output would be image when `const image = document.querySelector('img');`. Otherwise, in case you want to load what image you want regardless of sequence, add path like `img[src="img/green1.png"]` intead of `img`.
+
+- In case you want to add created textContent at the end of line, use function named appendChild(paragraph element) after creating the paragraph element with function named createElement(tagname).
+
+- `<body>`
+  `<section>`
+  `<img src="img/green1.png" alt="green" class="green">`
+  `<h1 id="esg">`Green Energy`</h1>`
+  `<h3>`Senario to limit increased temperature with global warming to 2 degrees`</h3>`
+  `</section>`
+  `<span>`Hello!`</span>`
+  `<script>`
+  const section = document.querySelector('section');
+  const h2 = document.createElement('h2');
+  h2.setAttribute('class', 'content'); // `<h2 class="content"></h2>`
+  h2.textContent = 'Develope value of ESG together'; // `<h2 class="content">Develope value of ESG together</h2>`
+  section.appendChild(h2);
+  `</script>`
+  `</body>`
+
+- In case you want to add created textContent at the place where you want, use insertBefore(newnode, referencenode) after adding event variable to operate function named insertBefore correctly.
+
+- `<script>`
+  const section = document.querySelector('section');
+  const h2 = document.createElement('h2');
+  h2.setAttribute('class', 'content');
+  h2.textContent = 'Develope value of ESG together';
+  const h3 = document.querySelector('h3');
+  section.insertBefore(h2,h3);
+  `</script>`
+
+    <img src="./img/output7.png" width="700" height="400">
+
+### 10. How to operate datas with API by browser
 
 - Object named Node inherits object named EventTarget. So, Event could occur on node because node inherits EventTarget. Document or Element inherit node. So, Event could occur on Document or Element according to DOM tree.
   In addition, browsers creat DOM tree with HTML data to understand and ready to operate correctly itself. For example, TextNode inherits h1 and h1 is inherits section, section inherits body step by step. Please compare HTML codes with DOM tree and find matching connection.
 
-      <img src="./img/node.png" width="700" height="200">
+    <img src="./img/node.png" width="700" height="200">
 
-      <img src="./img/dom1.png" width="700" height="400">
+    <img src="./img/dom1.png" width="700" height="400">
 
 - EventTarget API offers 3 methods such as addEventListener(), removeEventListener(), dispatchEvent(). Element or Document also use the methods because element or document inherits node.
   Please refer https://developer.mozilla.org/en-US/docs/Web/API/Node and https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.
@@ -375,43 +410,49 @@
 
 - Please refer https://csstriggers.com indicating whether or not choosed CSS property is good. Blink is one of engine on chrome. Gecko is one of engine on firefox. Webkit is one of engine on iOS and safari. EdgeHTML used to be one of engine on older edge browser and up-to-date edge browser use blink engine same as chrome. It would be bad choice of property if use layout, paint, composition stage. Try to use efficient property with less change such as only changed composition or changed paint and composition. For example, browser should use layout, paint, composition stage many times if values of property named `top` and `left` are changed. So, use property named `transform` to use only composition stage.
 
-#### 9-1. DOM tree
+#### 10-1. DOM tree
 
 - DOM: document object model. DOM mean HTML data is transformed into document object according to DOM tree. For example, tags of HTML is transformed to node of javascript by browser.
 
-     <img src="./img/dom1.png" width="700" height="400">
+    <img src="./img/dom1.png" width="700" height="400">
 
-#### 9.2 CCSOM tree
+#### 10.2 CCSOM tree
 
 - CCSOM: CCS object model. CSSOM creats another tree in which tag of style on HTML or CSS file are transformed into CCS object according to DOM tree. CSSOM has computed style with cascading rules.
 
-     <img src="./img/cssom.png" width="700" height="400">
+    <img src="./img/cssom.png" width="700" height="400">
 
-#### 9.3 Render Tree
+#### 10.3 Render Tree
 
 - Render tree means tree combined with DOM tree and CCSOM tree.
   The render tree do not include meta datas like tag of head that help better buliding up structures for stable.
 
-       <img src="./img/render1.png" width="700" height="400">
+    <img src="./img/render1.png" width="700" height="400">
 
 - In case tag of span has 0 value of opacity and hidden value of visibility, user can not see span data on window even though render tree has span data.
 
-     <img src="./img/render2.png" width="700" height="400">
+    <img src="./img/render2.png" width="700" height="400">
 
 - In contrast, in case span has none value of display, user can not see span data on window and render tree also do not have span data.
 
-     <img src="./img/render3.png" width="700" height="400">
+    <img src="./img/render3.png" width="700" height="400">
 
-### 10.Resolution of failures
+### 11.Resolution of failures
 
 - symptom: stangeous values of winow.inner, document.documentElement even though application operate without error. I do not know root cause why browser engine operate trash values. I will check...
 
-     <img src="./img/screen1.png" width="400" height="200">
+    <img src="./img/screen1.png" width="400" height="200">
 
 - countermeasure: type window.inner or document.documentElement on console tap of browser. In case of stangeous values come from browser engine, would be fixed correctly.
 
-     <img src="./img/screen2.png" width="400" height="200">
+    <img src="./img/screen2.png" width="400" height="200">
 
-- symptom: pointer of cursor do not oprated. I do not know root cuase why broswer engine do not operate correctly. I will check...
+- symptom: textcontent of heading2 is not operated on window with `Uncaught TypeError: Cannot read properties of null (reading 'setAttribut')` when use function named setattribute to creat attribute named class on tag of heading2. Element named h2 is not created because I do not use createElement to add tag of HTML. I mis-use querySelector so type error occurred bacause tag named h2 did not exist and there is not input of setAttribut. QuerySelector just return value of querySelector whenever event. The value would be element object representing first element in document.
 
-- countermeasure: class named button is assigned in memory and then changed tag of button. It would be operated correctly.
+    <img src="./img/error1.png" width="700" height="400">
+
+- countermeasure: replace `const h2 = document.querySelector('h2');` with `const h2 = document.createElement('h2');`
+
+- symptom: pointer of cursor do not oprated on button of application named 'Find symbol of rabbit'. I do not know root cuase why broswer engine do not operate correctly. I will check...
+
+- countermeasure: selector of queryselector replace `'button'` with `'.button'` and save and restore to change already assigned memory like `const button = document.querySelector('.button');`. Another is that add class on tag of button and save and restore changed tag of button like `<button class="buttons">Find a rabbit</button>`. It would be operated correctly.
