@@ -372,7 +372,7 @@
   `</script>`
   `</body>`
 
-- In case you want to add created textContent at the place where you want, use insertBefore(newnode, referencenode) after adding event variable to operate function named insertBefore correctly.
+- In case you want to add created textContent at the place where you want, use insertBefore(newnode, referencenode) after adding event variable to operate function named insertBefore correctly. The created event variable usually use with `insertBefore`, `appendChild`, `removeChild` when content of same tag should be changed many times. Otherwise, in case you want to change all contents to others on layer, use not only function named innerHTML but also $0.innerHTML on console directly.
 
 - `<script>`
   const section = document.querySelector('section');
@@ -437,7 +437,203 @@
 
     <img src="./img/render3.png" width="700" height="400">
 
-### 11.Resolution of failures
+### 11. Shopping list
+
+#### 11-1. HTML file
+
+- In case you want to load icons from website named font awesome, use `<script src="kit code received from font awesome" crossorigin="anonymous"></script>`. This code could be received on your emial after register for ID on the website and connect with your email.
+
+- Section should be assigned at first because of using some of section place on window. Header, ul, footer should be assigned from section space. li should be assigned to add or delete shopping lists. In case space should be needed to add text or icon, use tag of div at first, and then, define tags of not only span but also button. Class should be needed to control styling per tag efficiently as below.
+
+- `<section class="list">`
+  `<header class="header">Shopping list</header>`
+  `<ul class="items">`
+  `<li class="item__row">`
+  `<div class="item">`
+  `<span class="item__name">Egg</span>`
+  `<button class="item__button">`
+  `<i class="fas fa-trash-alt"></i>`
+  `</button>`
+  `</div>`
+  `</li>`
+  `<div class="item__divider"></div>`
+  `</ul>`
+  `<footer class="footer">`
+  `<input type="text" class="footer__input">`
+  `<button class="footer__button">`
+  `<i class="fas fa-plus"></i>`
+  `</button>`
+  `</footer>`
+  `</section>`
+
+- In case of all codes, Please refer file named `shopping.html`.
+
+#### 11-2. CSS file
+
+- Box sizing should be defined on global scope at first to place on same alignment of boxes. If not defined box sizing, in case you want to use input and define padding, size of input is wider than other boxs.
+  `text-align` controls position of text per box. `justify-content` controls position on main axis. `align-items` controls not only position on opposite axis. In case you use `display: flex` `and flex-direction: column`, main axis and opposite axis should be changed each other. In addition, use CSS properties on class of box in which div created or related to certain space directly if you want to apply to the space. For example, width is applied to class named `.list` to place same alginment and height is applied to class named `.items` to use height only on tag of ul except for header and footer. For second example, justify-content is applied to class named `.item` because of div and parent class of child classes named `.item__name` and `.item__button`. Please remind those.
+
+- In case you want gradient color, Please refer https://cssgradient.io/.
+
+- `*` {
+  `box-sizing`: border-box;
+  }
+  `ul` {
+  `padding`: 0;
+  }
+  `body` {
+  `text-align`: center;
+  `background-color`: #ced3df;
+  }
+  `button` {
+  `background`: transparent;
+  `border`: none;
+  `outline`: none;
+  `cursor`: pointer;
+  }
+  `.list` {
+  `width`: 400px;
+  `background-color`: #f1f0f7;
+  `border-radius`: 20px;
+  `margin`: auto;
+  }
+  `.items` {
+  `height`: 500px;
+  `overflow-y`: auto;
+  `margin`: 0px;
+  }
+  `.header` {
+  `height`: 48px;
+  `color`: white;
+  `font-size`: 34px;
+  `background`: rgb(240, 156, 86);
+  `background`: linear-gradient(
+  14deg,
+  rgba(240, 156, 86, 1) 0%,
+  rgba(234, 245, 97, 1) 22%,
+  rgba(144, 235, 224, 1) 45%,
+  rgba(0, 212, 255, 1) 100%
+  );
+  `border-radius`: 20px 20px 0 0;
+  }
+  `.footer` {
+  `height`: 90px;
+  `background`: rgb(240, 156, 86);
+  `background`: linear-gradient(
+  14deg,
+  rgba(240, 156, 86, 1) 0%,
+  rgba(234, 245, 97, 1) 22%,
+  rgba(144, 235, 224, 1) 45%,
+  rgba(0, 212, 255, 1) 100%
+  );
+  `border-radius`: 0 0 20px 20px;
+  `display`: flex;
+  `flex-direction`: column;
+  `justify-content`: space-between;
+  `align-items`: center;
+  }
+  `.item` {
+  `display`: flex;
+  `justify-content`: space-between;
+  `font-size`: 24px;
+  `align-items`: center;
+  `padding`: 8px 32px;
+  }
+  `.item__row` {
+  `list-style`: none;
+  }
+  `.item__button` {
+  `transition`: all 300ms ease-in;
+  `font-size`: 18px;
+  }
+  `.item__button:hover` {
+  `color`: red;
+  `transform`: scale(1.3);
+  }
+  `.item__divider` {
+  `width`: 90%;
+  `height`: 2px;
+  `background-color`: lightgray;
+  `margin`: auto;
+  }
+  `.footer__input` {
+  `width`: 100%;
+  `height`: 32px;
+  `outline`: none;
+  `border`: none;
+  `margin`: 0px;
+  `padding`: 0 16px;
+  `font-size`: 24px;
+  }
+  `.footer__button` {
+  `width`: 48px;
+  `height`: 48px;
+  `background-color`: black;
+  `color`: white;
+  `border-radius`: 50%;
+  `font-size`: 24px;
+  `transition`: transform 300ms ease-in;
+  `margin-bottom`: 4px;
+  }
+  `.footer__button:hover` {
+  `transform`: scale(1.3);
+  }
+
+- In case of all codes, Please refer file named `style.css`.
+
+#### 11-3. Javascript file
+
+- According to input.value, shopping list and trash icon are added when footer button is clicked, the shopping list is deleted when trash icon is clicked. This is concept of operating shopping list.
+
+- According to architecture of HTML, `ul` tag is needed because `ul` tag named `items` and `li` tag named `item__row` and `div` tag named `item__divider` are needed to apply to changes on not only `item__row` but also `item__divider` and their parent tag is `ul` tag. Second, `div` tag named `item` and `span` tag named `footer__input` and `button` tag named `footer__button` are needed because shopping list should be typed on input tab and click button to add the list. Their parent tag is `div` tag and there are changes controlled on space of `div` tag.
+
+- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contain variable related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contain variables created on local scrope. The variables are used to define additional tags in javascript once again for use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add empty space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined ad `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is charateristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is only defined and connection with node of items with `items.appendChild(itemRow);` on function `onAdd()`.
+
+- `const items = document.querySelector('.items');`
+  `const input = document.querySelector('.footer__input');`
+  `const addBtn = document.querySelector('.footer__button');`
+
+- `function onAdd()` {
+  // 1. RX named input.value when user type the value on input tab and click footer button.
+  `const text = input.value;`
+  console.log(text);
+  // 2. Creat new item with text and delete with trash icon button.
+  `const itemRow = createItem(text);`
+  // 3. Add created new item within class named 'items'.
+  `items.appendChild(itemRow);`
+  // 4. Initialize input
+  `input.value = '';`
+  `input.focus();`
+  }
+- `function createItem (text)` {
+  `const itemRow = document.createElement('li');`
+  `itemRow.setAttribute('class', 'item__row');`
+  `const itemDivider = document.createElement('div');`
+  `itemDivider.setAttribute('class', 'item__divider');`
+  `const item = document.createElement('div');`
+  `item.setAttribute('class', 'item');`
+  `const itemName = document.createElement('span');`
+  `itemName.setAttribute('class', 'item__name');`
+  `itemName.innerHTML = text;` //innerText와 비교
+  `const itemBtn = document.createElement('button');`
+  `itemBtn.setAttribute('class', 'item__button');`
+  itemBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
+  `itemBtn.addEventListener`('click', ()=> {
+  items.removeChild(itemRow);
+  });
+  `itemRow.appendChild(item);`
+  `itemRow.appendChild(itemDivider);`
+  `item.appendChild(itemName);`
+  `item.appendChild(itemBtn);`
+  `return itemRow;`
+  }
+- `addBtn.addEventListener`('click', () => {
+  onAdd();
+  })
+
+- In case of all codes, Please refer file named `main.js`.
+
+### 12.Resolution of failures
 
 - symptom: stangeous values of winow.inner, document.documentElement even though application operate without error. I do not know root cause why browser engine operate trash values. I will check...
 
