@@ -443,7 +443,7 @@
 
 - In case you want to load icons from website named font awesome, use `<script src="kit code received from font awesome" crossorigin="anonymous"></script>`. This code could be received on your emial after register for ID on the website and connect with your email.
 
-- Section should be assigned at first because of using some of section place on window. Header, ul, footer should be assigned from section space. li should be assigned to add or delete shopping lists. In case space should be needed to add text or icon, use tag of div at first, and then, define tags of not only span but also button. Class should be needed to control styling per tag efficiently as below.
+- Section should be assigned at first because of using some of section place on window tab. Tags named `header`, `ul`, `footer` should be assigned from section space. Tag named `li` should be assigned to add or delete shopping lists. In case space should be needed to add text or icon, add tag named `div` at first, and then, define tags named not only `span` but also `button`. Each class helps developer to decorate and control styling per tag efficiently when conncection with css file.
 
 - `<section class="list">`
   `<header class="header">Shopping list</header>`
@@ -470,8 +470,7 @@
 
 #### 11-2. CSS file
 
-- Box sizing should be defined on global scope at first to place on same alignment of boxes. If not defined box sizing, in case you want to use input and define padding, size of input is wider than other boxs.
-  `text-align` controls position of text per box. `justify-content` controls position on main axis. `align-items` controls not only position on opposite axis. In case you use `display: flex` `and flex-direction: column`, main axis and opposite axis should be changed each other. In addition, use CSS properties on class of box in which div created or related to certain space directly if you want to apply to the space. For example, width is applied to class named `.list` to place same alginment and height is applied to class named `.items` to use height only on tag of ul except for header and footer. For second example, justify-content is applied to class named `.item` because of div and parent class of child classes named `.item__name` and `.item__button`. Please remind those.
+- Box sizing should be defined on global scope at first to place boxes on same alignment of boxes. If not defined box sizing, in case you want to use input and define padding, size of input is wider than other boxes. CSS property named `text-align` controls position of text per box. CSS property named `justify-content` controls position on main axis. CSS property named `align-items` controls position on opposite axis. In case you use `display: flex` `and flex-direction: column`, main axis and opposite axis should be changed each other. In addition, use CSS properties on class of box in which div created or related to certain space directly if you want to apply to the space. For example, width should be applied to class named `.list` to place same alginment and height should be applied to class named `.items` to use height only on tag named `ul` except for `header` and `footer`. For second example, justify-content should be applied to class named `.item` because of empty box named `div`. `.item` is parent class of child classes named `.item__name` and `.item__button`. Please remind those.
 
 - In case you want gradient color, Please refer https://cssgradient.io/.
 
@@ -583,11 +582,11 @@
 
 #### 11-3. Javascript file
 
-- According to input.value, shopping list and trash icon are added when footer button is clicked, the shopping list is deleted when trash icon is clicked. This is concept of operating shopping list.
+- According to input.value, shopping list is added with trash icon button when footer button is clicked. Each of shopping lists would be deleted when trash icon button is clicked. This is concept of operating shopping list.
 
 - According to architecture of HTML, `ul` tag is needed because `ul` tag named `items` and `li` tag named `item__row` and `div` tag named `item__divider` are needed to apply to changes on not only `item__row` but also `item__divider` and their parent tag is `ul` tag. Second, `div` tag named `item` and `span` tag named `footer__input` and `button` tag named `footer__button` are needed because shopping list should be typed on input tab and click button to add the list. Their parent tag is `div` tag and there are changes controlled on space of `div` tag.
 
-- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contain variable related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contain variables created on local scrope. The variables are used to define additional tags in javascript once again for use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add empty space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined ad `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is charateristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is only defined and connection with node of items with `items.appendChild(itemRow);` on function `onAdd()`.
+- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contains variables related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contains variables created on local scrope. The variables are used to define virtual tags in javascript for a use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined as `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is characteristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is defined on function named `onAdd()` and connection with node named `items` using `items.appendChild(itemRow);` on function `onAdd()`.
 
 - `const items = document.querySelector('.items');`
   `const input = document.querySelector('.footer__input');`
@@ -632,6 +631,12 @@
   })
 
 - In case of all codes, Please refer file named `main.js`.
+
+#### 11-4. Output
+
+- <img src="./img/output8.png" width="300" height="300">
+
+  <img src="./img/output9.png" width="300" height="300">
 
 ### 12.Resolution of failures
 
