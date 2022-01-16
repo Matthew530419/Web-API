@@ -654,6 +654,42 @@
 
   <img src="./img/eventhandler.png" width="700" height="400">
 
+#### 12-1-1. Capturing and Bubbling
+
+- Browser controls capturing stages itself. So developer could control bubbling stages with event handler, rather than control capturing stages.
+
+- <img src="./img/eventhandler2.png" width="700" height="400">
+  <img src="./img/eventhandler3.png" width="700" height="400">
+
+- The event handler should be applied to per output like button1, button2 even though variable related to button1, button2 is only one. In addition, use conditional function named `If( !== )`, rather than `event.stopPropagation();` and `event.stopImmediatePropagation();`.
+  In case other functions may use event of clicking button, event handler of other functions could not use the event and could not get correct output because the event is stopped on function written down `stopPropagation()` or `stopImmediatePropagation()`. In case of using `If( !== )`, event handler of other functions could use the event and get correct output.
+
+- `<script>`
+  `const outer` = document.querySelector('.outer');
+  `const middle` = document.querySelector('.middle');
+  `const button` = document.querySelector('button');
+  `outer.addEventListener`('click', event => {
+  `if(event.currentTarget !== event.target)` {
+  return;
+  }
+  console.log(`outer: ${event.currentTarget}, ${event.target}`);
+  });
+  `middle.addEventListener`('click', event => {
+  `if(event.currentTarget !== event.target)` {
+  return;
+  }
+  console.log(`middle: ${event.currentTarget}, ${event.target}`);
+  });
+  `button.addEventListener`('click', event => {
+  console.log(`button1: ${event.currentTarget}, ${event.target}`);
+  });
+  `button.addEventListener`('click', event => {
+  console.log(`button2: ${event.currentTarget}, ${event.target}`);
+  });
+  `</script>`
+
+    <img src="./img/output10.png" width="700" height="400">
+
 ### 13.Resolution of failures
 
 - symptom: stangeous values of winow.inner, document.documentElement even though application operate without error. I do not know root cause why browser engine operate trash values. I will check...
