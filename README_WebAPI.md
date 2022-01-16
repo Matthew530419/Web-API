@@ -586,24 +586,25 @@
 
 - According to architecture of HTML, `ul` tag is needed because `ul` tag named `items` and `li` tag named `item__row` and `div` tag named `item__divider` are needed to apply to changes on not only `item__row` but also `item__divider` and their parent tag is `ul` tag. Second, `div` tag named `item` and `span` tag named `footer__input` and `button` tag named `footer__button` are needed because shopping list should be typed on input tab and click button to add the list. Their parent tag is `div` tag and there are changes controlled on space of `div` tag.
 
-- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contains variables related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contains variables created on local scrope. The variables are used to define virtual tags in javascript for a use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined as `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is characteristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is defined on function named `onAdd()` and connection with node named `items` using `items.appendChild(itemRow);` on function `onAdd()`.
+- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contains variables related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contains variables created on local scrope. The variables are used to define virtual tags in javascript for a use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined as `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is characteristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is defined on function named `onAdd()` and connection with node named `items` using `items.appendChild(itemRow);` on function `onAdd()`. In case you want to protect uploading with empty value, use `if (input.value === '')`. In case you want to upload values through not only clicking footer button but also entering input tab, use `addBtn.addEventListener` and `input.addEventListener` respectively.
 
 - `const items = document.querySelector('.items');`
   `const input = document.querySelector('.footer__input');`
   `const addBtn = document.querySelector('.footer__button');`
 
 - `function onAdd()` {
-  // 1. RX named input.value when user type the value on input tab and click footer button.
   `const text = input.value;`
-  console.log(text);
-  // 2. Creat new item with text and delete with trash icon button.
+  `if (input.value === '')`{
+  input.focus();
+  return;
+  }
   `const itemRow = createItem(text);`
-  // 3. Add created new item within class named 'items'.
   `items.appendChild(itemRow);`
-  // 4. Initialize input
+  `item.scrollIntoView({block : 'center'});`
   `input.value = '';`
   `input.focus();`
   }
+
 - `function createItem (text)` {
   `const itemRow = document.createElement('li');`
   `itemRow.setAttribute('class', 'item__row');`
@@ -628,6 +629,11 @@
   }
 - `addBtn.addEventListener`('click', () => {
   onAdd();
+  })
+  `input.addEventListener`('keypress', event => {
+  `if(event.key === 'Enter')`{
+  onAdd();
+  }
   })
 
 - In case of all codes, Please refer file named `main.js`.
@@ -657,3 +663,12 @@
 - symptom: pointer of cursor do not oprated on button of application named 'Find symbol of rabbit'. I do not know root cuase why broswer engine do not operate correctly. I will check...
 
 - countermeasure: selector of queryselector replace `'button'` with `'.button'` and save and restore to change already assigned memory like `const button = document.querySelector('.button');`. Another is that add class on tag of button and save and restore changed tag of button like `<button class="buttons">Find a rabbit</button>`. It would be operated correctly.
+
+- symptom: there is difference a little bit when clicking footer button and entering on input tab. In case of clicking button, new item could be uploaded on same place at point where screen looks at you. In contrast, in case of entering on input tab, the point is changed to top of box where screen looks at you.
+
+- Clicking footer button
+  <img src="./img/error2.png" width="300" height="300">
+  Entering on input tab
+  <img src="./img/error3.png" width="300" height="300">
+
+- countermeasure: I will check...
