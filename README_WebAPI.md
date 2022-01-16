@@ -644,7 +644,17 @@
 
   <img src="./img/output9.png" width="300" height="300">
 
-### 12.Resolution of failures
+### 12. Event
+
+- Event notifies codes of changes that may affect code operation. The event is used with parameter of method function and variable for correct output on form of DOM tree and javascript. There are many type of event interfaces such as using mouse or resizing window tab or changes in the state of underlying environment like low battery or any other cause. Please refer https://developer.mozilla.org/ko/docs/Web/Events for good understanding of event types.
+
+#### 12-1. Event handler
+
+- Web API has event handler and event handler helps browser engine operate correct output. For example, event would be called from broser engine with event handler when certain dynamic condition. EventTarget of DOM tree is used when event occur, according to DOM tree, element or document could be used as same as eventtarget. So, all elements with method function could event handler. EventTarget has 3 types of API such as `EventTarget.addEventListerner()`, `EventTarget.removeEventListener()`, `EventTarget.dispatchEvent()`. `removeEventListener()` should be used with defined variable Listener. The variable is used on not only `addEventListener()` but also `removeEventListener()`. `dispatchEvent()` would be used to creat artificial event like `$0.dispatchEvent(new Event('click'));`. However, `addEventListerner()` should be defined already to get correct output with `dispatchEvent()`.
+
+  <img src="./img/eventhandler.png" width="700" height="400">
+
+### 13.Resolution of failures
 
 - symptom: stangeous values of winow.inner, document.documentElement even though application operate without error. I do not know root cause why browser engine operate trash values. I will check...
 
