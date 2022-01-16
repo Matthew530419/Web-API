@@ -688,7 +688,26 @@
   });
   `</script>`
 
-    <img src="./img/output10.png" width="700" height="400">
+    <img src="./img/output10.png" width="400" height="400">
+
+#### 12-2. Prevent operation from happening on browser
+
+- In case you should check methods connection with other function in detail regarding event, you could use `event.preventDefault();`. browser can prevent operation of the function from happening on browser if use `event.preventDefault()` in the function. console.log() could be printed on console tab. In case of type named `wheel`, addEventListener is passive event listener. `event.preventDefault();` can not used with console warning because the passive event listener has target treated as passive. The passive event listener means browser outputs without waiting for other activities within the function in case feedback of this event should be actived very quickly like scrolling. However, In case you use option named `{passive: false}`, `event.preventDefault()` can be operated, but, you may find root cause related to passive event listener when your deburgging. So, `{passive: true}` is recommended. In case of normal event listener like type named `click`, `event.preventDefault()` ouputs correctly because browser waits enough for other acitivities within the function.
+
+- `<script>`
+  `const checkbox` = document.querySelector('input');
+  `document.addEventListener`(`'wheel'`, event => {
+  console.log('scrolled');
+  `event.preventDefault();`
+  }, `{passive: false}`
+  );
+  `checkbox.addEventListener`(`'click'`, event => {
+  console.log('checked');
+  `event.preventDefault();`
+  });
+  `</script>`
+
+    <img src="./img/output11.png" width="400" height="400">
 
 ### 13.Resolution of failures
 
