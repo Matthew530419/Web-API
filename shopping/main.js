@@ -5,12 +5,18 @@ const addBtn = document.querySelector('.footer__button');
 function onAdd() {
     // 1. RX named input.value when user type the value on input tab and click footer button.
     const text = input.value;
+    if (text === '') {
+        input.focus();
+        return;
+    }
     console.log(text);
     // 2. Creat new item with text and delete with trash icon button.
      const itemRow = createItem(text); 
     // 3. Add created new item within class named 'items'.
      items.appendChild(itemRow); 
-    // 4. Initialize input
+    // 4. Add scrolling putting newly added item on center.
+    itemRow.scrollIntoView({block : 'center'});
+    // 5. Initialize input
     input.value  = '';
     input.focus();
 }
@@ -46,4 +52,10 @@ function createItem (text) {
 
 addBtn.addEventListener('click', () => {
     onAdd();
+})
+
+input.addEventListener('keypress', event => {
+    if(event.key === 'Enter'){
+        onAdd();
+    }
 })
