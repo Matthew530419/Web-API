@@ -688,7 +688,7 @@
   });
   `</script>`
 
-    <img src="./img/output10.png" width="400" height="400">
+    <img src="./img/output10.png" width="500" height="500">
 
 #### 12-2. Prevent operation from happening on browser
 
@@ -707,7 +707,33 @@
   });
   `</script>`
 
-    <img src="./img/output11.png" width="400" height="400">
+    <img src="./img/output11.png" width="500" height="500">
+
+#### 12-3. Event delegation from parent node rather than all elements on current node with for loop
+
+- According to bubbling stages, parent container could use event occurred on each of child elements.
+
+- Change background-color to yellow when clicking the list.
+
+- Parent node named `ul` should be defined on javascript to use `ul.addEventListener()`. In case class should be added for contents with tag named `style` is applied to, use `classList.add()` with `event.target` to use event target on parent node instead of `event.currentTarget`.
+
+- In case of bad built code, all elements are searched and affected some of elements are applied to as below. `document.querySelectorAll()` should be used to creat array for function named `forEach()`.
+
+`const lis` = `document.querySelectorAll('li');`
+`lis.forEach`(`li` => {
+li.addEventListener('click', () => {
+`li.classList.add('selected');`
+});
+})
+
+- In case of good built code, event delegation is used to get one of event target and operated normally. `ul` is defined to get one of event target on parent node instead of current node. class named `.selected` is added with `classList.add('selected');` to apply to yellow color using tag named `style`.
+
+- `const ul` = document.querySelector('ul');
+  ul.addEventListener('click', event => {
+  `event.target`.`classList.add('selected');`
+  })
+
+    <img src="./img/output12.png" width="500" height="500">
 
 ### 13.Resolution of failures
 
