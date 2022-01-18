@@ -712,7 +712,9 @@
   onAdd();
   })
 
-- - In case of all codes, Please refer file named `main3.js`.
+- In case of all codes, Please refer file named `main3.js`.
+
+- <img src="./img/output14.png" width="300" height="300">
 
 ### 12. Event
 
