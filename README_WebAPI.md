@@ -677,6 +677,8 @@
 
 - In case of all codes, Please refer file named `main2.js`.
 
+- <img src="./img/output13.png" width="700" height="400">
+
 ### 12. Event
 
 - Event notifies codes of changes that may affect code operation. The event is used with parameter of method function and variable for correct output on form of DOM tree and javascript. There are many type of event interfaces such as using mouse or resizing window tab or changes in the state of underlying environment like low battery or any other cause. Please refer https://developer.mozilla.org/ko/docs/Web/Events for good understanding of event types.
