@@ -582,11 +582,11 @@
 
 #### 11-3. Javascript file
 
-- According to input.value, shopping list is added with trash icon button when footer button is clicked. Each of shopping lists would be deleted when trash icon button is clicked. This is concept of operating shopping list.
+- According to input.value, each of shopping lists is added with trash icon button when footer button is clicked. Each of shopping lists would be deleted when trash icon button is clicked. This is concept of operating shopping list. Element directly related to event such as clicking button, enter text on input tab should be defined on javascript with `document.querySelector()`.
 
-- According to architecture of HTML, `ul` tag is needed because `ul` tag named `items` and `li` tag named `item__row` and `div` tag named `item__divider` are needed to apply to changes on not only `item__row` but also `item__divider` and their parent tag is `ul` tag. Second, `div` tag named `item` and `span` tag named `footer__input` and `button` tag named `footer__button` are needed because shopping list should be typed on input tab and click button to add the list. Their parent tag is `div` tag and there are changes controlled on space of `div` tag.
+- Please refer architecture of HTML tags and try to understand connection between parent node and child node. `ul` tag with class named `items` contains `li` tag with class named `item__row` and `div` tag with class named `item__divider`. `li` tag with class named `item__row` contains `div` tag with class named `item`. `div` tag with class named `item` contains `span` tag with class named `item__name` and `button` tag with class named `item__button`. Their correlation of tags is important to use api functions and innerHTML. This means understanding of architecture is very important to use javascript for correct operation when using with `element.createElement()` and `element.setAttribute()`.
 
-- Define variables that are related to `querySelector` and you want to change when dynamic condition at first. Function named `onAdd()` contains variables related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contains variables created on local scrope. The variables are used to define virtual tags in javascript for a use on dynamic condition, rather than use tags already defined in HTML. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add space of `div` where `item__name` and `item__button` are controlled. `itemRow.appenchild(itemDivider);` would be used to add line of `item__divider`. The reason why it is defined as `itemRow.appendchild(itemDivider)` rather than `items.appendchild(itemDivider)` is characteristic of appendchild(). The characteristic could move nodes that is already defined and referenced on HTML to new location. In addition, variable named `itemRow` is defined on function named `onAdd()` and connection with node named `items` using `items.appendChild(itemRow);` on function `onAdd()`. In case you want to protect uploading with empty value, use `if (input.value === '')`. In case you want to upload values through not only clicking footer button but also entering input tab, use `addBtn.addEventListener` and `input.addEventListener` respectively.
+- Define variable related to `querySelector` if you want to change the variable when dynamic condition at first. Function named `onAdd()` contains variables related with `input.value` and `createItem(text);` and could initialize input. Function named `createItem()` contains variables related to virtual tag with class for a use on dynamic condition. The variables are related with classes named `item__row`, `item__divider`, `item`, `item__name`, `item__button`. `itemRow.appendchild(item);` would be used to add text of list and trash icon because container is needed to include the text and icon. `itemRow.appenchild(itemDivider);` would be used to add line of divider. In addition, variable named `itemRow` is defined on function named `onAdd()` and connection with node named `items` using `items.appendChild(itemRow);` on function `onAdd()`. In case you want to protect uploading with empty value and ready to cursor on input tab, use `if (input.value === ''){input.focus()}` after `const text= input.value;`. In case you want to upload values through not only clicking footer button but also entering input tab, use `addBtn.addEventListener('click', ()=> { onAdd();})` and `input.addEventListener('keypress', ()=> {if(event.key === 'Enter'){ onAdd();}})` respectively. In addition, defined return value is important because return value is not only output of the function but also input of other function.
 
 - `const items = document.querySelector('.items');`
   `const input = document.querySelector('.footer__input');`
@@ -614,7 +614,7 @@
   `item.setAttribute('class', 'item');`
   `const itemName = document.createElement('span');`
   `itemName.setAttribute('class', 'item__name');`
-  `itemName.innerHTML = text;` //innerText와 비교
+  `itemName.innertext = text;`
   `const itemBtn = document.createElement('button');`
   `itemBtn.setAttribute('class', 'item__button');`
   itemBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
@@ -643,6 +643,39 @@
 - <img src="./img/output8.png" width="300" height="300">
 
   <img src="./img/output9.png" width="300" height="300">
+
+#### 11-5. Optimized shopping list with event delegation
+
+- `const itemDivider = document.createElement('div');`
+  `itemDivider.setAttribute('class', 'item__divider');`
+  `const item = document.createElement('div');`
+  `item.setAttribute('class', 'item');`
+  `const itemName = document.createElement('span');`
+  `itemName.setAttribute('class', 'item__name');`
+  `itemName.innertext = text;`
+  `const itemBtn = document.createElement('button');`
+  `itemBtn.setAttribute('class', 'item__button');`
+  itemBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
+
+- string template means `. Same output comes from codes of upper and lower. The goal of ${id} is to get output with specified icon except for other icon.
+
+  - `itemRow.innerHTML` = `string template`
+    `<div class="item">`
+    `<span class="item__name">`${text}`</span>`
+    `<button class="item__button" >`
+    `<i class="fas fa-trash-alt"` `data-id=${id}>`` </i>` `</button>` `</div>` `<div class="item__divider"> ``</div>` `string template;`
+
+- Use parent node with event.target for event delegation. use `if(id) {toVedelete.remove();}` to remove box of item when clicking on specified icon among some space of items. Console tab helps user find selector for querySelector. For example, type items.querySelector('`.item__row[data-id="0"]`'); and then you could get output related to `li` tag with class named `item**row` and the id. This path should be applied to the variable that could delete the list of box named `item`.
+
+- `items.addEventListener`('click', event => {
+  `const id` = `event.target.dataset.id;`
+  if(id) {
+  `const toBedelete` = document.querySelector(`.item__row[data-id ="${id}"]`);
+  `toBedelete.remove();`
+  }
+  })
+
+- In case of all codes, Please refer file named `main2.js`.
 
 ### 12. Event
 
@@ -715,16 +748,16 @@
 
 - Change background-color to yellow when clicking the list.
 
-- Parent node named `ul` should be defined on javascript to use `ul.addEventListener()`. In case class should be added for contents with tag named `style` is applied to, use `classList.add()` with `event.target` to use event target on parent node instead of `event.currentTarget`.
+- Parent node named `ul` should be defined on javascript to use `ul.addEventListener()`. In case class should be added for contents with tag named `style` are applied to, use `classList.add()` with `event.target` to use event target on parent node instead of `event.currentTarget`.
 
 - In case of bad built code, all elements are searched and affected some of elements are applied to as below. `document.querySelectorAll()` should be used to creat array for function named `forEach()`.
 
-`const lis` = `document.querySelectorAll('li');`
-`lis.forEach`(`li` => {
-li.addEventListener('click', () => {
-`li.classList.add('selected');`
-});
-})
+- `const lis` = `document.querySelectorAll('li');`
+  `lis.forEach`(`li` => {
+  li.addEventListener('click', () => {
+  `li.classList.add('selected');`
+  });
+  })
 
 - In case of good built code, event delegation is used to get one of event target and operated normally. `ul` is defined to get one of event target on parent node instead of current node. class named `.selected` is added with `classList.add('selected');` to apply to yellow color using tag named `style`.
 
