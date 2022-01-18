@@ -636,6 +636,8 @@
   }
   })
 
+- Unfortunately keypress would be deprecated so we should use keyup. In case of keyup, execution occur after completed compossing. In contrast, in case of keydown, execution could occur before completed compossing. That's not always the case. So, `if(event.isCompossing) { return;}` maybe needs to reduce risk of error. It would be better to use keyup as type of addEventListener().
+
 - In case of all codes, Please refer file named `main.js`.
 
 #### 11-4. Output
@@ -678,6 +680,39 @@
 - In case of all codes, Please refer file named `main2.js`.
 
 - <img src="./img/output13.png" width="700" height="400">
+
+#### 11-6. Optimized shopping list with tag named form
+
+- In case of HTML, add tag named form covering tags needed event. The type of `form.addEventListener` would be assigned to `submit` automatically except for decision of type manually.
+
+- `<form class="footer__form">`
+  `<input type="text" class="footer__input">`
+  `<button type="submit" class="footer__button">`
+  `<i class="fas fa-plus"></i>`
+  `</button>`
+  `</form>`
+
+- In case of all codes, Please refer file named `shopping_form.html`.
+
+- In case of CSS, CSS properties should be moved from `.footer` to `.footer__form` like display, flex-direction, align-items, and so on.
+
+- `.footer__form` {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+- In case of all codes, Please refer file named `style2.css`.
+
+- In case of javascript, `const form = document.querySelector('.footer__form');` should be built up to use element on dynamic condition. DOM string of selector should write dot '.' to get correct element instead of null. `form.addEventListener('submit', event =>{onAdd();})` should be also built up instead of not only `addBtn.addEventListener('click', event=>{})` but also `input.addEventListener('keydown', event=>{})`. Browser has loading once again when type of event named submit. That means refresh on webpage. `event.preventDefault()` should be used to prevent blinking output.
+
+- const form = document.querySelector(`'.footer__form'`);
+- `form.addEventListener`(`'submit'`, event => {
+  `event.preventDefault();`
+  onAdd();
+  })
+
+- - In case of all codes, Please refer file named `main3.js`.
 
 ### 12. Event
 
