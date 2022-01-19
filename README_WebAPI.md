@@ -659,15 +659,15 @@
   `itemBtn.setAttribute('class', 'item__button');`
   itemBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
 
-- string template means `. Same output comes from codes of upper and lower. The goal of ${id} is to get output with specified icon except for other icon.
+- Template literal means `. Same output comes from codes of upper and lower. The goal of ${id} is to get output with specified icon except for other icon.
 
-  - `itemRow.innerHTML` = `string template`
-    `<div class="item">`
-    `<span class="item__name">`${text}`</span>`
-    `<button class="item__button" >`
-    `<i class="fas fa-trash-alt"` `data-id=${id}>`` </i>` `</button>` `</div>` `<div class="item__divider"> ``</div>` `string template;`
+- `itemRow.innerHTML` = `template liternal`
+  `<div class="item">`
+  `<span class="item__name">` `${text}` `</span>`
+  `<button class="item__button" >`
+  `<i class="fas fa-trash-alt"` ` data-id=${id}>`` </i> ` `</button>` `</div>` `<div class="item__divider">` `</div>` `template leternal;`
 
-- Use parent node with event.target for event delegation. use `if(id) {toVedelete.remove();}` to remove box of item when clicking on specified icon among some space of items. Console tab helps user find selector for querySelector. For example, type items.querySelector('`.item__row[data-id="0"]`'); and then you could get output related to `li` tag with class named `item**row` and the id. This path should be applied to the variable that could delete the list of box named `item`.
+- Use parent node with event.target for event delegation. use `if(id) {toBedelete.remove();}` to remove box of item when clicking on specified icon among some space of items. There is maybe not operation when you type `document.querySelector('.item__row[data-id="${id}"]');`. In this case, console tab helps user find selector for querySelector. For example, use `items.querySelector('.item__row[data-id="0"]');` on console tab. Browser indicates the output correctly without mis-understanding commands. And then, you copied this code from console tab and then paste on javascript file. Apostrophe should be changed to template literal. You could finally get output related to `li` tag with class named `item__row` and the id with javascript. This path should be applied to the variable named `toBedelete` that could delete the list of box named `item`.
 
 - `items.addEventListener`('click', event => {
   `const id` = `event.target.dataset.id;`
