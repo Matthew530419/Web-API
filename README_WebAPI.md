@@ -308,14 +308,14 @@
 
 ### 8. Find symbol of rabbit
 
-- Add button named Find a rabbit and image with id named rabbit as below.
+- Add `button` named `Find a rabbit` and image with `id` named `rabbit` as below.
 
 - `<body>`
   `<button>Find a rabbit</button>`
   `<img id="rabbit" src="img/rabbit.png" alt="rabbit">`
   `</body>`
 
-- In case of symbol of rabbit with button, use function named `scrollIntoView` after variables named button and rabbit defined. use option of block: center if you want to put symbol of rabbit on center of documentElement of browser. rabbit is element of function named scrollIntoView.
+- In case of finding symbol of rabbit when clicking button, use function named `scrollIntoView` after variables named `button` and `rabbit` defined with `querySelector()` on tag named `script`. The variable named `button` should be used when clicking button. The other variable named `rabbit` should be used when moving symbol of rabbit. `const rabbit = document.querySelector('#rabbit');` means to define element for using web APIs. Please Use option of `block: center` if you want to put symbol of rabbit on center of documentElement of browser. `rabbit` of `rabbit.scrollIntoView()` is element of web-API named `scrollIntoView`. The web-API is type of function().
 
 - `<script>`
   `const button` = document.querySelector('button');
@@ -325,15 +325,15 @@
   });
   `</script>`
 
-- In case of decorating button and put icons on cener, function named button and body would be used as below. CSS function named text-align could place icons horizontally.
+- In case of tag named `body`, CSS property named `text-align` is used to position icons on center of horizontal direction. In case of tag named `img`, CSS property named `display` is used to position images on each of div box.
 
 - `<style>`
   `body` {
   background-color: black;
-  `text-align`: center;
+  `text-align: center;`
   }
   `img` {
-  display: block;
+  `display: block;`
   margin: auto;
   }
   `button` {
